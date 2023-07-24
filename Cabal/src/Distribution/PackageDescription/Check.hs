@@ -1210,17 +1210,20 @@ checkFields pkg =
       | (compiler, vr) <- testedWith pkg
       , isNoVersion vr ]
 
+<<<<<<< HEAD
     internalLibraries =
         map (maybe (packageName pkg) unqualComponentNameToPackageName . libraryNameString . libName)
             (allLibraries pkg)
 
+=======
+>>>>>>> 4aa5f8861 (PD check: do not treat library names as package names (#9132))
     internalExecutables = map exeName $ executables pkg
 
     internalLibDeps =
       [ dep
       | bi <- allBuildInfo pkg
       , dep@(Dependency name _ _) <- targetBuildDepends bi
-      , name `elem` internalLibraries
+      , name == packageName pkg
       ]
 
     internalExeDeps =
